@@ -14,7 +14,7 @@ const Storage = multer.diskStorage({
 
 const upload = multer({
   storage: Storage,
-}).single("testImage");
+}).single("image");
 
 
 router.all("/", (req, res, next) => {
@@ -24,6 +24,16 @@ router.all("/", (req, res, next) => {
     "Origin, X-Requested-With, Content-type, Accept"
   );
   next();
+});
+
+router.get('/images', (req, res) => {
+    Poster.find({})
+    .then((title, category, image, err)=>{
+        if(err){
+            console.log(err);
+        }
+        res.send(title, category, image)
+    })
 });
 
 
@@ -37,7 +47,7 @@ router.post(
           title: req.body.title,
           category: req.body.category,
           image: {
-            data: req.file.filename,
+            data: req.file.destination,
             contentType: "image/png",
           },
         });

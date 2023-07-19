@@ -59,11 +59,9 @@ router.post("/login" , asyncHandler(async(req, res) =>{
     const confirm = await users.findOne({email})
 
     if(confirm && (await bcrypt.compare(password, confirm.password))){
-        res.status(201).json({
-            _id: confirm.id,
-            name: confirm.name,
-            email: confirm.email,
-            token: generateJWT(confirm._id)
+        res.status(200).json({
+            message:"Login success",
+            // token: generateJWT(confirm._id),
         })
 
     }else{
@@ -76,6 +74,13 @@ router.post("/login" , asyncHandler(async(req, res) =>{
 //Get all users
 router.get("/users", security, (req, res) =>{
     res.json({message:'Data for all users'})
+})
+
+//all users
+router.get("/user-list", async(req, res) =>{
+    const fullList = await users.find({})
+    return res.status(200).json(fullList)
+    
 })
 
 //Generate JWT
