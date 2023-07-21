@@ -37,6 +37,40 @@ router.get('/images', (req, res) => {
 });
 
 
+//Getting a specific docs
+router.get(("/latest"), async(req, res) => {
+  try {
+    const image = await Poster.findOne({}) // Get the latest document
+      .sort({ createdAt: -1 }) // Sort in descending order based on createdAt
+     .exec()
+
+     res.set('Content-Type', image.contentType);
+     res.send(image.data);
+
+    // if (!latestData) {
+    //   return res.status(404).json({ error: 'No data found' });
+    // }
+    // const { title, category, image } = latestData;
+    // res.set('Content-Type', image.contentType);
+    // res.send({ title, category, image: image.data });
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    res.status(500).json({ error: 'Failed to fetch data' });
+  }
+});
+      
+//Getting all docs
+router.get("/product-images", async(req, res) => {
+   await feature.find({})
+    .then((title, description, price, brand, err) => {
+      if(err){
+        console.log(err);
+      }
+      res.send(title, description, price, brand)
+    })
+});
+
+
 router.post(
   "/poster", (req, res, next) => {
     upload(req, res, (err) => {
