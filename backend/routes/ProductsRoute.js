@@ -1,0 +1,138 @@
+const express = require("express");
+// const asyncHandler = require("express-async-handler");
+const products = require("../model/Products");
+const multer = require("multer");
+const router = express();
+
+const storage = multer.memoryStorage(); // Save the file in memory as a Buffer
+
+// File filter to accept only image files (modify as per your requirements)
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith("image/")) {
+    cb(null, true);
+  } else {
+    cb(new Error("Invalid file type. Only image files are allowed."));
+  }
+};
+
+const upload = multer({ storage, fileFilter });
+
+router.all("/", (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-type, Accept"
+  );
+  next();
+});
+
+//insert product into database
+router.post("/new-product", upload.single("image"), async (req, res) => {
+  try {
+    const newProduct = new products({
+      name: req.body.name,
+      brand: req.body.brand,
+      rating: req.body.rating,
+      price: req.body.price,
+      size: req.body.size,
+      colors: req.body.colors,
+      desc: req.body.desc,
+      image: {
+        data: req.file.buffer,
+        contentType: req.file.mimetype,
+      },
+    });
+
+    await newProduct.save();
+
+    res.status(200).json({ message: "Successful upload" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Server error." });
+  }
+});
+
+//get all the products in database
+router.get("/all-products", async (req, res) => {
+  try {
+    const mostRecentPoster = await products.find();
+    //console.log("This is the product", mostRecentPoster)
+
+    if (mostRecentPoster.length === 0) {
+      return res.status(404).json({ message: "No posters found." });
+    }
+
+    const postersData = mostRecentPoster.map((poster) => {
+      const imageBase64 = poster.image.data.toString("base64");
+      return {
+        name: poster.name,
+        brand: poster.brand,
+        rating: poster.rating,
+        price: poster.price,
+        size: poster.size,
+        colors: poster.colors,
+        desc: poster.desc,
+        image: imageBase64,
+      };
+    });
+
+    res.json(postersData);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+//get the most recent
+router.get("/new-product/recent", async (req, res) => {
+  try {
+    const mostRecentNewProduct = await products
+      .findOne()
+      .sort({ createdAt: -1 })
+      
+
+    if (
+      !mostRecentNewProduct ||
+      !mostRecentNewProduct.image ||
+      !mostRecentNewProduct.image.data
+    ) {
+      return res.status(404).json({ message: "No posters found." });
+    }
+
+    const imageBase64 = mostRecentNewProduct.image.data.toString("base64");
+    //console.log("this is base64", imageBase64);
+
+    if (!imageBase64) {
+      return res.status(500).json({ message: "Image data conversion failed." });
+    }
+
+    const { name, brand, price, size, colors, desc, rating } =
+      mostRecentNewProduct;
+
+    res.json({
+      name,
+      brand,
+      rating,
+      price,
+      size,
+      colors,
+      desc,
+      image: imageBase64,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.get("/all-products/all", async (req, res) => {
+  await products.find().then((name, brand, price, size, err) => {
+    if (err) {
+      console.log(err);
+    }
+    res.send(name, brand, price, size);
+  });
+});
+
+module.exports = router;
