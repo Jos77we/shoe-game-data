@@ -55,28 +55,36 @@ router.post("/new-product", upload.single("image"), async (req, res) => {
 //get all the products in database
 router.get("/all-products", async (req, res) => {
   try {
-    const mostRecentPoster = await products.find();
-    //console.log("This is the product", mostRecentPoster)
+    const allDoc = await products.find()
 
-    if (mostRecentPoster.length === 0) {
-      return res.status(404).json({ message: "No posters found." });
-    }
+    const documentsWithBase64Image = allDoc.map((doc) => ({
+      ...doc.toObject(),
+      image: {
+        data: doc.image.data.toString('base64'), // Convert the buffer to base64 string
+        contentType: doc.image.contentType,
+      },
+    }));
 
-    const postersData = mostRecentPoster.map((poster) => {
-      const imageBase64 = poster.image.data.toString("base64");
-      return {
-        name: poster.name,
-        brand: poster.brand,
-        rating: poster.rating,
-        price: poster.price,
-        size: poster.size,
-        colors: poster.colors,
-        desc: poster.desc,
-        image: imageBase64,
-      };
-    });
+    res.json(documentsWithBase64Image);
 
-    res.json(postersData);
+    // console.log("This is the product", RecentProduct)
+
+    // if (!RecentProduct.length === 0 || !RecentProduct.image || !RecentProduct.image.data) {
+    //   return res.status(404).json({ message: "No posters found." });
+    // }
+    //   const imageBase64 = RecentProduct.image.data.toString("base64");
+    //   const { name, brand, price, size, colors, desc, rating } = RecentProduct;
+   
+    // res.json({
+    //   name,
+    //   brand,
+    //   rating,
+    //   price,
+    //   size,
+    //   colors,
+    //   desc,
+    //   image: imageBase64,
+    // });
 
   } catch (err) {
     console.error(err);

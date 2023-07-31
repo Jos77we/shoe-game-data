@@ -54,7 +54,7 @@ router.get("/poster/recent", async (req, res) => {
   try {
     const mostRecentPoster = await Poster.findOne()
       .sort({ createdAt: -1 })
-      .limit(1);
+    
 
     if (
       !mostRecentPoster ||

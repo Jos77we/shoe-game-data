@@ -10,9 +10,13 @@ const app = express()
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
-app.use(cors)
+app.use(cors({
+    origin : ["http://localhost:3000", "http://localhost:3001"],
+    default: "http://localhost:3000"
+}))
 app.use('/api', require('./routes/ImagePosterRoute'))
 app.use('/product', require('./routes/ProductsRoute'))
 app.use('/api/user', require('./routes/UserRoute'))
+app.use('/brand', require('./routes/BrandLogoRoute'))
 // app.set('view engine', 'ejs');
 app.listen(port, () => console.log(`server started on port ${port}`))
