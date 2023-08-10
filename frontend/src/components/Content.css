@@ -1,0 +1,30 @@
+.content{
+    display: flex;
+}
+.content-logo{
+    flex: 2.0;
+    padding: 0px 30px;
+
+}
+.content-login{
+    flex: 2.0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login{
+    height: 400px;
+    width: 20em;
+    border-radius: 10px;
+    background-color: rgba(101, 241, 115, 0.32);
+    margin: 20px 0px;
+    margin-right: 80px;
+}
+.login-tab{
+    height: 40px;
+    width: 80%;
+    padding: 0px 10px;
+    background-color: rgb(255, 255, 255, 0.76);
+    border-radius: 50px;
+    border: transparent;
+}
