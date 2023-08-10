@@ -59,17 +59,20 @@ router.post("/login" , asyncHandler(async(req, res) =>{
     const confirm = await users.findOne({email})
 
     if(confirm && (await bcrypt.compare(password, confirm.password))){
+        const {name} = confirm
         res.status(200).json({
+            name,
             message:"Login success",
             // token: generateJWT(confirm._id),
         })
-
+        console.log(name)
     }else{
         res.status(400)
         throw new Error("Invalid login credentials")
     }
    
 }))
+
 
 //Get all users
 router.get("/users", security, (req, res) =>{
