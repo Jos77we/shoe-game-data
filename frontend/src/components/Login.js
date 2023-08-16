@@ -9,7 +9,7 @@ import { Button, Input } from "antd";
 import axios from "axios";
 // import axios from 'axios'
 import { useNavigate } from "react-router-dom";
-const Content = () => {
+const Login = () => {
   const [email, setEmail] = useState(" ");
   const [password, setPassword] = useState(" ");
   const url = 'http://localhost:5000/api/user/login'
@@ -21,26 +21,24 @@ const Content = () => {
       formData.append("email", email)
       formData.append("password", password)
       try {
-        await axios.post(url, formData,{
+        const res = await axios.post(url, formData,{
             headers: {
                 "Content-Type": "application/json",
               },
-        })
-        .then((res) => {
-           
+        }) 
            if(res.status === 200){
               nav('/Upload')
            }
-           console.log(res)
-        })
-        .catch((err) => {
-            console.log(err);
-      })
+            
+           //console.log(res)
+       
+        
       } catch (error) {
         alert("Error login in. Please try again.");
       }
      
   }
+  
   return (
     <div className="content">
       <div className="content-logo">
@@ -114,5 +112,4 @@ const Content = () => {
     </div>
   );
 };
-
-export default Content;
+export default Login;

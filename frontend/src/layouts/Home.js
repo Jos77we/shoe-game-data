@@ -1,5 +1,5 @@
 import React from 'react'
-import Content from '../components/Content'
+import Login from '../components/Login'
 import Topbar from '../components/Topbar'
 import '../App.css'
 
@@ -8,7 +8,7 @@ const Home = () => {
     <>
     <div className='homepage'>
     <Topbar/>
-    <Content/>
+    <Login/>
     </div>
     </>
   )

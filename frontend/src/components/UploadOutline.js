@@ -13,6 +13,7 @@ const UploadOutline = () => {
   const url = "http://localhost:5000/api/poster";
   const url1 = "http://localhost:5000/api/product";
   const url2 = "http://localhost:5000/product/new-product"
+  const url3 = "http://localhost:5000/brand/new-logo"
 
   const [image, setImage] = useState(null);
   const [title, setTitle] = useState(" ");
@@ -170,8 +171,54 @@ const UploadOutline = () => {
     }
    
   };
+//brand
+const [logoname, setLogoname] = useState(" ")
+const [logoType, setLogoType] = useState(" ")
+const [logo, setLogo] = useState(null)
 
+const handlelogoImageChange = (e) => {
+  setLogo(e.target.files[0]);
 
+  const myLogoFile= e.target;
+  const file = myLogoFile.files[0];
+  const fileName = file.name;
+
+  const fileNameParagraph = document.getElementById("fileLogoParagraph");
+  fileNameParagraph.textContent = fileName;
+};
+
+const handleLogoImageCancelPicture = () => {
+  setLogo(null);
+
+  const fileNameParagraph = document.getElementById("fileLogoParagraph");
+  fileNameParagraph.innerHTML = " ";
+};
+const handleLogoSubmit = async (e) => {
+  e.preventDefault();
+  const formData = new FormData();
+  formData.append("image", logo);
+  formData.append("brand", logoname);
+  formData.append("type", logoType )
+  
+  try {
+    await axios
+      .post(url3, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (error) {
+    alert("Error uploading image. Please try again.");
+  }
+ 
+};
   return (
     <>
       <div>
@@ -438,6 +485,72 @@ const UploadOutline = () => {
         </div>
       </form>
      
+     {/* brand */}
+     <div>
+        <p style={{ fontWeight: "normal", fontSize: "1.2rem" }}>Brand Upload</p>
+      </div>
+      <form onSubmit={(e) => handleLogoSubmit(e)}>
+        <div
+          style={{
+            marginTop: "20px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <div className="upload">
+            <p className="text">Click or drag file to this area to upload</p>
+            <input
+              type="file"
+              id="myLogoFile"
+              name="filename"
+              onChange={handlelogoImageChange}
+            />
+          </div>
+        </div>
+        <div
+          style={{
+            height: "60px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div className="uploaded-image">
+            <div style={{ width: "70%" }}>
+              <p
+                id="fileLogoParagraph"
+                style={{ marginLeft: "20px", fontWeight: "bold" }}
+              ></p>
+            </div>
+            <CloseCircleOutlined
+              style={{ fontSize: "20px" }}
+              onClick={handleLogoImageCancelPicture}
+            />
+          </div>
+        </div>
+        <div style={{ marginLeft: "30px" }}>
+          <p style={{ padding: "10px" }}>Name</p>
+          <Input
+            style={{ width: "60%" }}
+            type="text"
+            placeholder="Description"
+            onChange={(e) => setLogoname(e.target.value)}
+          />
+        </div>
+        <div style={{ marginLeft: "30px" }}>
+          <p style={{ padding: "10px" }}>Type</p>
+          <Input
+            style={{ width: "60%" }}
+            type="text"
+            placeholder="Category"
+            onChange={(e) => setLogoType(e.target.value)}
+          />
+        </div>
+        <div>
+          <Dragger content={<GetRecentPoster/>}/>
+        </div>
+      </form>
     </>
   );
 };

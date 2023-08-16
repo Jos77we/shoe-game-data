@@ -4,6 +4,8 @@ import { Layout, Menu, theme } from 'antd';
 import { useState } from 'react';
 //import UploadOutline from '../components/UploadOutline';
 import { useNavigate} from 'react-router-dom';
+//import Login from '../components/Login';
+
 
 const { Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
@@ -39,6 +41,7 @@ const Design = (props) => {
   };
 
    const content = props.content;
+
   return (
     <Layout hasSider
       style={{
