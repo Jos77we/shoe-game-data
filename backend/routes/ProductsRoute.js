@@ -97,7 +97,7 @@ router.get("/new-product/recent", async (req, res) => {
   try {
     const mostRecentNewProduct = await products
       .findOne()
-      .sort({ createdAt: -1 })
+      .sort({ _id: -1 })
       
 
     if (
@@ -135,12 +135,30 @@ router.get("/new-product/recent", async (req, res) => {
 });
 
 router.get("/all-products/all", async (req, res) => {
-  await products.find().then((name, brand, price, size, err) => {
-    if (err) {
-      console.log(err);
-    }
-    res.send(name, brand, price, size);
-  });
+  try {
+    const all =await products.find().select("name brand price size")
+    res.json(all)
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+  
+   
 });
+
+//getting shoes by their brand
+router.get("/brand-shoes", async(req, res) => {
+  const brand = req.query.brand
+  try {
+    const api = await products.find({brand: brand}).limit(4).select("name price colors")
+    
+      res.json(api)
+     
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+  //res.send('Response send to client::'+req.query.brand);
+})
 
 module.exports = router;
