@@ -27,7 +27,7 @@ const Login = () => {
               },
         }) 
            if(res.status === 200){
-              nav('/Upload')
+              nav('/Dashboard')
            }
             
            //console.log(res)

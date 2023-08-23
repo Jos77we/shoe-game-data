@@ -39,4 +39,30 @@ router.post("/new-logo", upload.single("image"), async (req, res) => {
     }
   });
 
+  router.get("/logo", async(req, res) => {
+    const brand = req.query.brand
+   // console.log(brand)
+    try {
+      
+      const oneLogo = await logo.findOne({brand: brand})
+      //console.log("oneLogo:", oneLogo);
+      
+      if (!oneLogo || !oneLogo.image || !oneLogo.image.data) {
+        return res.status(404).json({ message: "No logo found." });
+      }
+  
+      const imageBase64 = oneLogo.image.data.toString("base64");
+      //console.log("this is base64", imageBase64);
+  
+      if (!imageBase64) {
+        return res.status(500).json({ message: "Image data conversion failed." });
+      }
+  
+      res.json({image: imageBase64})
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ message: "Server error." });
+    }
+  })
+
   module.exports = router;

@@ -1,7 +1,7 @@
-import React from 'react'
-import { FileOutlined, SettingOutlined, UserOutlined, DesktopOutlined, HomeOutlined, SnippetsOutlined } from '@ant-design/icons';
+import React, { useState } from 'react'
+import { FileOutlined, SettingOutlined, UserOutlined, DesktopOutlined, HomeOutlined, SnippetsOutlined, CloudUploadOutlined  } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
-import { useState } from 'react';
+
 //import UploadOutline from '../components/UploadOutline';
 import { useNavigate} from 'react-router-dom';
 //import Login from '../components/Login';
@@ -17,13 +17,11 @@ function getItem(label, key, icon, children) {
   };
 }
 const items = [
-  getItem('Upload', '1', <SnippetsOutlined />),
-  getItem('List', '2',  <FileOutlined />),
-  getItem('Users', '3', <UserOutlined/>),
-  getItem('Settings', 'sub1',<SettingOutlined />, [
-    getItem('Tom', '4'),
-    getItem('Bill', '5'),
-  ]),
+  getItem('DashBoard', '1', <SnippetsOutlined />),
+  getItem('Upload', '2', <CloudUploadOutlined /> ),
+  getItem('List', '3',  <FileOutlined />),
+  getItem('Users', '4', <UserOutlined/>),
+  getItem('Settings', '5',<SettingOutlined />),
   getItem('Display', '6', <DesktopOutlined />)
 ];
 
@@ -59,11 +57,12 @@ const Design = (props) => {
       }}>
         <div
           style={{
-            height: 32,
+            height: 20,
             margin: 16,
-            background: 'rgba(255, 255, 255, 0.2)',
+            background: 'transparent',
+            color:"White"
           }}
-        />
+        ><p>Main Menu</p></div>
         <Menu theme="dark" mode="inline"  defaultSelectedKeys={['1']}>
         {items.map((item) => (
         <Menu.Item  key={item.label} onClick={() => handleMenuClick(item.label)} >
@@ -79,12 +78,12 @@ const Design = (props) => {
       }}>
         <Content
           style={{
-            margin: '0 16px',
+            margin: '0 10px',
             overflow: 'initial',
           }}
         >
           <div style={{display:'flex'}}>
-          <p style={{padding:'10px', fontWeight:'bold', fontSize:'1.5rem', flex:'3.0'}}>Welcome Grace</p> 
+          <p style={{padding:'5px 10px', fontWeight:'bold', fontSize:'1.5rem', flex:'3.0'}}>Welcome Grace</p> 
           <div style={{padding:'30px 10px', flex:'0.2'}}>
             <a href='/'>
           <HomeOutlined style={{fontSize:'20px'}}/>
@@ -103,9 +102,9 @@ const Design = (props) => {
           <div
             style={{
               padding: 24,
-              minHeight: 360,
+              minHeight: 460,
               background: colorBgContainer,
-              borderRadius:'8px'
+              borderRadius:'6px'
             }}
            
           >

@@ -150,9 +150,13 @@ router.get("/all-products/all", async (req, res) => {
 router.get("/brand-shoes", async(req, res) => {
   const brand = req.query.brand
   try {
-    const api = await products.find({brand: brand}).limit(4).select("name price colors")
-    
-      res.json(api)
+    const api = await products.find({brand: brand}).limit(4)
+    const productData = api.map(product => ({
+      name: product.name,
+      price: product.price,
+      imageUrl: `data:${product.image.contentType};base64,${product.image.data.toString('base64')}`
+    }));
+      res.json(productData )
      
   } catch (error) {
     console.error(error);

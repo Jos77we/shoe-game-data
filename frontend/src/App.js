@@ -6,11 +6,13 @@ import List from "./layouts/List";
 import Users from "./layouts/Users";
 import Settings from "./layouts/Settings";
 import Display from "./layouts/Display";
+import DashBoard from "./layouts/DashBoard";
 function App() {
   return (
     <>
       <Routes>
         <Route exact path="/" element={<Home />} />
+        <Route exact path="/DashBoard" element={<DashBoard />} />
         <Route exact path="/Upload" element={<Upload />} />
         <Route exact path="/List" element={<List />} />
         <Route exact path="/Users" element={<Users />} />
