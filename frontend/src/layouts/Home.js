@@ -1,5 +1,5 @@
 import React from 'react'
-import Login from '../components/Login'
+import {Login} from '../components/Login'
 import Topbar from '../components/Topbar'
 import '../App.css'
 

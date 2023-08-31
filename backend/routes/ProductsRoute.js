@@ -67,25 +67,6 @@ router.get("/all-products", async (req, res) => {
 
     res.json(documentsWithBase64Image);
 
-    // console.log("This is the product", RecentProduct)
-
-    // if (!RecentProduct.length === 0 || !RecentProduct.image || !RecentProduct.image.data) {
-    //   return res.status(404).json({ message: "No posters found." });
-    // }
-    //   const imageBase64 = RecentProduct.image.data.toString("base64");
-    //   const { name, brand, price, size, colors, desc, rating } = RecentProduct;
-   
-    // res.json({
-    //   name,
-    //   brand,
-    //   rating,
-    //   price,
-    //   size,
-    //   colors,
-    //   desc,
-    //   image: imageBase64,
-    // });
-
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
@@ -148,13 +129,19 @@ router.get("/all-products/all", async (req, res) => {
 
 //getting shoes by their brand
 router.get("/brand-shoes", async(req, res) => {
-  const brand = req.query.brand
+  //const brand = req.query.brand
+  const { brandNames } = req.query;
+  //const brands = brandNames.split(',');
   try {
-    const api = await products.find({brand: brand}).limit(4)
-    const productData = api.map(product => ({
+    const api = await products.find({brand: { $in: brandNames }}).limit(16)
+    const productData = api.map((product) => ({
+      ...product.toObject(),
       name: product.name,
       price: product.price,
-      imageUrl: `data:${product.image.contentType};base64,${product.image.data.toString('base64')}`
+      imageUrl: {
+        data: product.image.data.toString('base64'), // Convert the buffer to base64 string
+        contentType: product.image.contentType,
+      },
     }));
       res.json(productData )
      

@@ -38,7 +38,7 @@ router.post("/new" , asyncHandler(async (req, res) =>{
     })
 
     if(user){
-        res.status(201).json({
+        res.status(200).json({
             _id: user.id,
             name: user.name,
             email: user.email,
@@ -63,7 +63,7 @@ router.post("/login" , asyncHandler(async(req, res) =>{
         res.status(200).json({
             name,
             message:"Login success",
-            // token: generateJWT(confirm._id),
+             //token: generateJWT(confirm._id),
         })
         console.log(name)
     }else{
@@ -86,6 +86,12 @@ router.get("/user-list", async(req, res) =>{
     
 })
 
+//Number of users
+router.get("/count-users", async(req, res) =>{
+    const countUsers = await users.count({})
+    return res.status(200).json(countUsers)
+    
+})
 //Generate JWT
 const generateJWT = (id) =>{
     return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: '20d'})

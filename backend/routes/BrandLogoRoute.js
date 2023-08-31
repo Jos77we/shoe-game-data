@@ -40,25 +40,26 @@ router.post("/new-logo", upload.single("image"), async (req, res) => {
   });
 
   router.get("/logo", async(req, res) => {
-    const brand = req.query.brand
-   // console.log(brand)
+    const { brandNamess } = req.query;
+    //const brands = brandNames.split(',');
+    
     try {
       
-      const oneLogo = await logo.findOne({brand: brand})
-      //console.log("oneLogo:", oneLogo);
+      const oneLogo = await logo.find({brand: { $in: brandNamess }});
+
+      const documentsWithBase64Image = oneLogo.map((doc) => ({
+        ...doc.toObject(),
+        image: {
+          data: doc.image.data.toString('base64'), // Convert the buffer to base64 string
+          contentType: doc.image.contentType,
+        },
+      }));
       
-      if (!oneLogo || !oneLogo.image || !oneLogo.image.data) {
-        return res.status(404).json({ message: "No logo found." });
-      }
-  
-      const imageBase64 = oneLogo.image.data.toString("base64");
-      //console.log("this is base64", imageBase64);
-  
-      if (!imageBase64) {
+      if (!documentsWithBase64Image) {
         return res.status(500).json({ message: "Image data conversion failed." });
       }
-  
-      res.json({image: imageBase64})
+
+      res.json(documentsWithBase64Image);
     } catch (error) {
       console.error(error)
       res.status(500).json({ message: "Server error." });

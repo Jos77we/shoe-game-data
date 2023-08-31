@@ -1,10 +1,11 @@
 import React from 'react'
 import Design from '../design/Design'
+import DashboardOutline from '../components/DashboardOutline'
 
 const DashBoard = () => {
-   const word = 'dASHBOARD'
+  
     return (
-        <Design content={word}/>
+        <Design content={<DashboardOutline/>}/>
       )
 }
 

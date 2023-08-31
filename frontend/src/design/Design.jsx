@@ -4,7 +4,7 @@ import { Layout, Menu, theme } from 'antd';
 
 //import UploadOutline from '../components/UploadOutline';
 import { useNavigate} from 'react-router-dom';
-//import Login from '../components/Login';
+//import {UserName} from '../components/Login';
 
 
 const { Content, Footer, Sider } = Layout;
@@ -27,6 +27,9 @@ const items = [
 
 
 const Design = (props) => {
+
+  
+
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
@@ -78,18 +81,11 @@ const Design = (props) => {
       }}>
         <Content
           style={{
-            margin: '0 10px',
+            margin: '0 2px',
             overflow: 'initial',
           }}
         >
-          <div style={{display:'flex'}}>
-          <p style={{padding:'5px 10px', fontWeight:'bold', fontSize:'1.5rem', flex:'3.0'}}>Welcome Grace</p> 
-          <div style={{padding:'30px 10px', flex:'0.2'}}>
-            <a href='/'>
-          <HomeOutlined style={{fontSize:'20px'}}/>
-          </a>
-          </div>
-          </div>
+          
           {/* <Breadcrumb
             style={{
               margin: '16px 0',
@@ -102,18 +98,25 @@ const Design = (props) => {
           <div
             style={{
               padding: 24,
-              minHeight: 460,
+              minHeight: 580,
               background: colorBgContainer,
               borderRadius:'6px'
             }}
            
           >
+           <div style={{margin:'2px 0px', display:"flex", alignItems:'end', justifyContent:'flex-end'}}>
+            
+            <a href='/'>
+          <HomeOutlined style={{fontSize:'18px'}}/>
+          </a>
+          </div>
             {content}
           </div>
         </Content>
         <Footer
           style={{
             textAlign: 'center',
+            height:"30px"
           }}
         >
           OneCell Technologies ©2023 Created by Me

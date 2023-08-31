@@ -1,0 +1,35 @@
+.calender{
+    height: 100px;
+    background-color: rgba(71, 117, 236, 0.50);
+    border-radius: 8px;
+    display: grid;
+}
+.calender-layout{
+    height: 80px;
+    background-color: transparent;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: auto;
+    column-gap: 10px;
+}
+.circle-date{
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    background-color: white;
+
+}
+
+.events{
+    margin-top: 10px;
+    height: 200px;
+    background-color: rgb(147, 171, 192);
+}
+
+.activities{
+    margin-top: 10px;
+    height: 250px;
+    background-color: blanchedalmond;
+}
