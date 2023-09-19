@@ -2,24 +2,43 @@
     height: 100px;
     background-color: rgba(71, 117, 236, 0.50);
     border-radius: 8px;
-    display: grid;
+    display: flow-root;
 }
 .calender-layout{
     height: 80px;
     background-color: transparent;
     margin-top: 10px;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
     grid-template-columns: auto;
-    column-gap: 10px;
+    column-gap: 5px;
 }
-.circle-date{
+
+.circle-square{
+    height: 60px;
+    width: 35px;
+    /* border: 1px solid black; */
+    text-align: center;
+    display: flow-root;
+}
+.circle-date, .circle-date1{
     height: 30px;
     width: 30px;
     border-radius: 15px;
     background-color: white;
+    text-align: center;
+    
+}
 
+.circle-date{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle-date:hover{
+    border: 2px solid rgb(2, 31, 68);
 }
 
 .events{

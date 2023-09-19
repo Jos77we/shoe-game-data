@@ -22,15 +22,17 @@
 }
 .dasboard1-item, .dasboard2-item,.dasboard3-item,.dasboard4-item,.dasboard5-item{
     width: 95%;
-    background-color: rgba(180, 202, 200, 0.79);
+    background-color: rgba(124, 177, 177, 0.79);
     border-radius: 6px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
+    box-shadow: 0 2px 8px 0 rgba(40, 63, 63, 0.79);
 }
 
 .dasboard1-item{
     height: 300px;
+    display: flow-root;
    
 }
 
@@ -46,10 +48,18 @@
 
 .dasboard4-item{
     height: 200px;
-    
+    background: linear-gradient(120deg, rgba(142, 210, 250, 0.555), rgba(112, 124, 124, 0.719) 80%);
 }
 
 .dasboard5-item{
     height: 160px;
    
+}
+
+.dasboard-half{
+    height: 140px;
+    display: flex;
+    grid-template-columns: auto auto;
+    column-gap: 10px;
+    /* border: 1px solid black; */
 }

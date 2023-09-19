@@ -75,8 +75,15 @@ router.post("/login" , asyncHandler(async(req, res) =>{
 
 
 //Get all users
-router.get("/users", security, (req, res) =>{
-    res.json({message:'Data for all users'})
+router.get("/users", security, async(req, res) =>{
+    try {
+        const full = await users.find({})
+    
+        return res.status(200).json(full)
+    } catch (error) {
+      return res.status(400).json(error)
+    }
+   
 })
 
 //all users

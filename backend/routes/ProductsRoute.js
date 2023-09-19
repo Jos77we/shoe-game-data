@@ -152,4 +152,22 @@ router.get("/brand-shoes", async(req, res) => {
   //res.send('Response send to client::'+req.query.brand);
 })
 
+//gettting the tottal number of products
+const pipeline = [
+  {
+    $group: {
+      _id: '$brand', // Group by the 'gender' field
+      count: { $sum: 1 }, // Count the documents in each group
+    },
+  },
+];
+router.get("/total", async(req,res) => {
+ try {
+  const ress = await products.aggregate(pipeline).exec()
+  res.json(ress)
+  //  console.log(ress)
+ } catch (error) {
+  console.log(error)
+ }
+})
 module.exports = router;
