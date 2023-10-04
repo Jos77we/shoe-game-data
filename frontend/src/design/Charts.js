@@ -40,9 +40,8 @@ console.log("items inside")
     datasets: [{
       labels: 'Shoes',
       data: formattedData,
-      backgroundColor:['rgb(81, 46, 104)', 'rgb(34, 62, 122)', 'rgb(17, 54, 5'],
-      borderColor: ['rgb(81, 46, 104)', 'rgb(34, 62, 122)', 'rgb(17, 54, 5'],
-      borderRadius: 4
+      backgroundColor:['rgb(81, 46, 104)', 'rgb(34, 62, 122)', 'rgb(17, 54, 5)'],
+      borderColor: ['rgb(81, 46, 104)', 'rgb(34, 62, 122)', 'rgb(17, 54, 5)'],
 
     }]
   }

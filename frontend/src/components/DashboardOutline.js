@@ -7,7 +7,7 @@ import DashboardLarge from '../design/DashboardLarge'
 import Charts from '../design/Charts'
 import BarChart from '../design/BarChart'
 import ArcChart from '../design/ArcChart'
-import {ArrowUpOutlined, ArrowDownOutlined} from '@ant-design/icons'
+import {ArrowUpOutlined, ArrowDownOutlined, InstagramOutlined, TwitterOutlined, FacebookOutlined } from '@ant-design/icons'
 
 const DashboardOutline = () => {
 
@@ -16,9 +16,11 @@ const DashboardOutline = () => {
     <div className='dashboard-container'>
       <div className='dashboard-layout1'>
         <div className='dasboard1-item'>
+        <p style={{fontWeight:'500', fontSize:'1.05rem', marginTop:'-0rem', marginLeft:'16px'}}>Stock Items</p>
         <div className = "dasboard-half">
         <Charts/>
-          <div>
+          <div style={{marginLeft:'16px', fontSize:'0.7rem0'
+          }}>
             <p>Adidas</p>
             <p>Puma</p>
             <p>New Balance</p>
@@ -26,7 +28,7 @@ const DashboardOutline = () => {
           </div>
           <div>
             <div style={{height:'20px', display:'grid'}}>
-            <p style={{marginTop:'-2px', fontSize:'1.05rem', fontWeight:'600'}}>Available Stocks</p>
+            <p style={{marginTop:'-2px', fontSize:'1.05rem', fontWeight:'600', marginLeft:'16px'}}>Available Stocks</p>
             </div>
             <div style={{display: 'flex', gridTemplateColumns:'auto', columnGap:'20px', justifyContent:'center'}}>
               <div style={{width:'70px', textAlign:'center'}}>
@@ -84,8 +86,24 @@ const DashboardOutline = () => {
         <div className='dasboard4-item'> 
           <BarChart/>   
         </div>
-        <div className='dasboard5-item'></div>
+        <div className='dasboard5-item'>
+          <div style={{height:'100px', width:'50px'}}>
+            <div style={{marginLeft:'4,.5px', marginTop:'5px'}}><InstagramOutlined style={{fontSize:'24px'}}/></div>  
+          <p style={{fontSize:'1.02rem', textAlign:'center'}}>20.4k</p>
+          <p style={{fontSize:'0.7rem', marginTop:'-1rem'}}>followers</p></div>
+          <div style={{height:'100px', width:'50px'}}>
+          <div style={{marginLeft:'3px', marginTop:'5px'}}><TwitterOutlined style={{fontSize:'24px'}}/></div>
+          <p style={{fontSize:'1.02rem', textAlign:'center'}}>17.6k</p>
+          <p style={{fontSize:'0.7rem', marginTop:'-1rem'}}>retweets</p></div>
+          <div style={{height:'100px', width:'50px'}}>
+          <div style={{marginLeft:'3px', marginTop:'5px'}}><FacebookOutlined style={{fontSize:'24px'}}/></div>
+          <p style={{fontSize:'1.02rem', textAlign:'center'}}>30.9k</p>
+          <p style={{fontSize:'0.7rem', marginTop:'-1rem'}}>friends</p></div>
+          <div style={{height:'150px', width:'100px', border:'1px solid black'}}></div>
         
+        
+        
+        </div>
       </div>
       <div className='dashboard-layout3'>
         <DashboardLarge/>

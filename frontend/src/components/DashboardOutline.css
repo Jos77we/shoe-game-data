@@ -18,11 +18,12 @@
 }
 
 .dashboard-layout3{
-    background-color: rgba(180, 202, 200, 0.79);
+    background-color: rgba(201, 240, 236, 0.79);
+    box-shadow: 0 2px 8px 0 rgba(22, 36, 36, 0.79);
 }
 .dasboard1-item, .dasboard2-item,.dasboard3-item,.dasboard4-item,.dasboard5-item{
     width: 95%;
-    background-color: rgba(124, 177, 177, 0.79);
+    background-color: rgba(139, 162, 175, 0.76);
     border-radius: 6px;
     margin-left: auto;
     margin-right: auto;
@@ -53,7 +54,11 @@
 
 .dasboard5-item{
     height: 160px;
-   
+    display: flex;
+    grid-template-columns: auto;
+    column-gap: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 .dasboard-half{

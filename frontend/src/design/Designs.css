@@ -1,8 +1,12 @@
 .calender{
     height: 100px;
     background-color: rgba(71, 117, 236, 0.50);
-    border-radius: 8px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 8px;
     display: flow-root;
+    width: 98%;
+    margin-top: 4px;
 }
 .calender-layout{
     height: 80px;
@@ -22,33 +26,88 @@
     text-align: center;
     display: flow-root;
 }
-.circle-date, .circle-date1{
+.circle-date{
     height: 30px;
     width: 30px;
     border-radius: 15px;
     background-color: white;
     text-align: center;
-    
-}
-
-.circle-date{
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 
 .circle-date:hover{
     border: 2px solid rgb(2, 31, 68);
+    cursor: pointer;
+}
+
+.circle-date1{
+    margin-left: 6px;
+    height: 35px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: rgb(15, 14, 14);
 }
 
 .events{
     margin-top: 10px;
-    height: 200px;
+    height: 250px;
     background-color: rgb(147, 171, 192);
+    border-radius: 6px;
+    width: 99%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flow-root;
+    
+}
+.label{
+    height: 30px; 
+    width: 140px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.events-category{
+    display: flex;
+    grid-template-columns: auto;
+    column-gap: 10px;
+    justify-content: center;
 }
 
 .activities{
     margin-top: 10px;
-    height: 250px;
-    background-color: blanchedalmond;
+    height: 200px;
+    background-color: rgb(221, 183, 125);
+    border-radius: 6px;
+    width: 97%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.current{
+    color: rgb(163, 8, 8);
+    font-weight: bold;
+}
+.other{
+    color:black;
+}
+
+.user-profile{
+    height: 45px; 
+    /* border: 1px rgb(36, 35, 35) solid; */
+    width: 92%; 
+    border-top-right-radius: 8px; 
+    border-top-left-radius: 4px; 
+    border-bottom-right-radius: 8px; 
+    border-bottom-left-radius: 4px;
+    margin-top: 5px;
+    margin-left: 4px;
+    display: flex;
+    grid-template-columns: auto;
+    column-gap: 20px;
+    align-items: center;
+    background-color: rgba(217, 217, 217, 0.781);
 }
